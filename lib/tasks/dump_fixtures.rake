@@ -8,12 +8,12 @@ namespace :db do
 
     private
       def require_and_execute_command
-        if defined?(ActiveRecord)
-          require 'active_record/dumper.rb'
-          FixturesDumper::ActiveRecord::Dumper.dump_tables(ENV)
-        elsif defined?(Mongoid)
+        if defined?(Mongoid)
           require 'mongoid/dumper.rb'
           FixturesDumper::Mongoid::Dumper.dump_collections(ENV)
+        else
+          require 'active_record/dumper.rb'
+          FixturesDumper::ActiveRecord::Dumper.dump_tables(ENV)
         end
       end
   end
